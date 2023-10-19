@@ -1,18 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"context"
 
-	"github.com/a-h/templ"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/wolves/templ-htmx/pkg/view"
 )
 
 func main() {
-	component := view.Index("Christopher")
+	e := echo.New()
 
-	http.Handle("/", templ.Handler(component))
+	e.Use(middleware.Logger())
 
-	fmt.Println("Listening on :3000")
-	http.ListenAndServe(":3000", nil)
+	// e.Static("/assets", "dist")
+
+	e.GET("/", func(c echo.Context) error {
+		component := view.Index("Christopher")
+		return component.Render(context.Background(), c.Response().Writer)
+	})
+
+	e.Logger.Fatal(e.Start(":3333"))
+
 }
