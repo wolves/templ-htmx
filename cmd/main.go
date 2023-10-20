@@ -13,7 +13,7 @@ func main() {
 
 	e.Use(middleware.Logger())
 
-	// e.Static("/assets", "dist")
+	e.Static("/assets", "dist")
 
 	e.GET("/", func(c echo.Context) error {
 		component := view.Index("Christopher")

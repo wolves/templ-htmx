@@ -1,0 +1,22 @@
+{
+  "name": "templ-htmx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "none",
+  "scripts": {
+    "serve": "run-p client server tailwind",
+    "client": "pnpm exec webpack --watch --mode development",
+    "server": "air",
+    "tailwind": "pnpm exec tailwindcss -i src/index.css -o dist/index.css --watch"
+  },
+  "keywords": [],
+  "author": "WLVS <cs@wlvs.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "npm-run-all2": "^6.1.1",
+    "tailwindcss": "^3.3.3",
+    "ts-loader": "^9.5.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
