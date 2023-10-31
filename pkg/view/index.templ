@@ -19,7 +19,10 @@ templ Index(name string) {
 		</head>
 		<body>
 			@Hello(name)
-			<div>Test Text</div>
+			<div id="targ">Test Text</div>
+			<button hx-get="/exp/asdfasdf" hx-trigger="click" hx-target="#targ" hx-swap="innerHTML">
+				Click
+			</button>
 		</body>
 	</html>
 }

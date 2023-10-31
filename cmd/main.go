@@ -20,6 +20,12 @@ func main() {
 		return component.Render(context.Background(), c.Response().Writer)
 	})
 
+	e.GET("/exp/:data", func(c echo.Context) error {
+		data := c.Param("data")
+		component := view.Exp(data)
+		return component.Render(context.Background(), c.Response().Writer)
+	})
+
 	e.Logger.Fatal(e.Start(":3333"))
 
 }
