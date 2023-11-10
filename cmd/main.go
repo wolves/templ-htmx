@@ -1,31 +1,36 @@
 package main
 
 import (
-	"context"
+	"net/http"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"github.com/wolves/templ-htmx/pkg/view"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func main() {
-	e := echo.New()
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 
-	e.Use(middleware.Logger())
-
-	e.Static("/assets", "dist")
-
-	e.GET("/", func(c echo.Context) error {
-		component := view.Index("Christopher")
-		return component.Render(context.Background(), c.Response().Writer)
 	})
-
-	e.GET("/exp/:data", func(c echo.Context) error {
-		data := c.Param("data")
-		component := view.Exp(data)
-		return component.Render(context.Background(), c.Response().Writer)
-	})
-
-	e.Logger.Fatal(e.Start(":3333"))
-
+	http.ListenAndServe(":3333", r)
+	// e := echo.New()
+	//
+	// e.Use(middleware.Logger())
+	//
+	// e.Static("/assets", "dist")
+	//
+	// e.GET("/", func(c echo.Context) error {
+	// 	component := view.Index("Christopher")
+	// 	return component.Render(context.Background(), c.Response().Writer)
+	// })
+	//
+	// e.GET("/exp/:data", func(c echo.Context) error {
+	// 	data := c.Param("data")
+	// 	component := view.Exp(data)
+	// 	return component.Render(context.Background(), c.Response().Writer)
+	// })
+	//
+	// e.Logger.Fatal(e.Start(":3333"))
+	//
 }
